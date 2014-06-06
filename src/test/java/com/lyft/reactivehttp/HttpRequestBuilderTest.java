@@ -35,7 +35,7 @@ public class HttpRequestBuilderTest {
     ReactiveHttpClient client = new ReactiveHttpClient(
             new OkHttpTransport(new OkHttpClient()),
             gson,
-            Schedulers.currentThread(),
+            Schedulers.io(),
             new ConsoleLog(),
             true);
 

@@ -1,6 +1,7 @@
 package com.lyft.reactivehttp;
 
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.OkUrlFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,9 +13,11 @@ import java.util.Map;
 
 public class OkHttpTransport implements HttpTransport {
     private OkHttpClient okHttpClient;
+    private OkUrlFactory okUrlFactory;
 
     public OkHttpTransport(OkHttpClient okHttpClient) {
         this.okHttpClient = okHttpClient;
+        this.okUrlFactory = new OkUrlFactory(this.okHttpClient);
     }
 
     @Override
@@ -26,7 +29,7 @@ public class OkHttpTransport implements HttpTransport {
         HttpResponse response = null;
 
         try {
-            connection = okHttpClient.open(new URL(request.getUrl()));
+            connection = okUrlFactory.open(new URL(request.getUrl()));
 
             connection.setRequestMethod(request.getMethod());
 

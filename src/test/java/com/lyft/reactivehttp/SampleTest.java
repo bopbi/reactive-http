@@ -21,9 +21,10 @@ package com.lyft.reactivehttp;
 import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 import org.junit.Test;
+
+import rx.functions.Action0;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import rx.util.functions.Action0;
-import rx.util.functions.Action1;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,7 +60,7 @@ public class SampleTest {
         return  new ReactiveHttpClient(
                 new OkHttpTransport(new OkHttpClient()),
                 gson,
-                Schedulers.currentThread(),
+                Schedulers.io(),
                 new ConsoleLog(),
                 false);
     }
